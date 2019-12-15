@@ -39,7 +39,17 @@ module.exports = {
     ]
 }
 ```
+创建.browserslistrc
+```
+# Browsers that we support
 
+defaults,
+not ie < 9,
+last 2 versions,
+> 1%,
+iOS 7,
+last 3 iOS versions
+```
 # 安装bable解决在项目中使用ES6的问题
 
 ```
@@ -211,4 +221,8 @@ npm i -D @babel/react @babel/preset-react // 编译react
 
 效果感人~
 
+Chrome的表现
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191215130444317.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dSaWFuX0Jhbg==,size_16,color_FFFFFF,t_70)
+
+IE9的表现
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191215133147985.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dSaWFuX0Jhbg==,size_16,color_FFFFFF,t_70)
