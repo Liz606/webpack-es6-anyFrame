@@ -11,7 +11,15 @@ git commit -m "first commit"
 git remote add origin https://github.com/xxxxxxx/webpack-es6-anyFrame.git
 git push -u origin master
 ```
+记得创建.gitignore文件
+```
+# dependencies
+/node_modules
 
+# production
+/build
+
+```
 # 初始化项目
 
 ```
@@ -23,12 +31,34 @@ npm i -D webpack webpack-cli webpack-dev-server
 ```
 npm i -D autoprefixer style-loader css-loader sass node-sass sass-loader postcss-loader html-loader html-webpack-plugin uglifyjs-webpack-plugin mini-css-extract-plugin webpack-merge babel-plugin-import
 ```
+创建postcss.config.js
+```
+module.exports = {
+    plugins: [
+        require('autoprefixer')
+    ]
+}
+```
 
 # 安装bable解决在项目中使用ES6的问题
 
 ```
-npm i -D babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/plugin-transform-runtime
+npm i -D babel-loader @babel/core @babel/preset-env  @babel/plugin-transform-runtime @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators
+
+npm i -D @babel/react @babel/preset-react // 编译react
 ```
+创建.babelrc
+```
+{
+  "presets": [
+      "@babel/preset-env",
+      "@babel/react"
+  ],
+  "plugins": ["@babel/transform-runtime", ["@babel/plugin-proposal-decorators", {"legacy": true}], "@babel/plugin-proposal-class-properties"]
+}
+```
+# 开始构建项目基本架构
+创建src文件，新建index.html及indes.js作为项目入口
 
 # 开始配置webpack
 - 创建webpack.common.config
@@ -145,3 +175,40 @@ npm i -D babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/p
     mode:"production"
     });
     ```
+
+
+# 配置启动命令
+```
+//package.son
+{
+    ···
+    "scripts": {
+        "start": "node_modules/.bin/webpack",
+        "dev": "node_modules/.bin/webpack-dev-server  --config ./webpack.dev.config.js --process  --color --host localhost --mode development"
+    },
+    ···
+}
+```
+
+# 简单的使用
+
+ -  在src下创建style.scss
+	```
+	body{
+	    background: skyblue;
+	}
+	```
+
+- 在src/index.js中导入样式文件并编写ES6代码
+
+	```
+	import './style.scss';
+	{
+	    let a = 'hi~';
+	    alert(a);
+	}
+	```
+
+效果感人~
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191215130444317.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1dSaWFuX0Jhbg==,size_16,color_FFFFFF,t_70)
